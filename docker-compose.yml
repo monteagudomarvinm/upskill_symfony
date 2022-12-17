@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  database:
-    container_name: database
+  upskill_symfony_database:
+    container_name: upskill_symfony_database
     image: postgres:11
     environment:
       POSTGRES_PASSWORD: symfony
@@ -12,8 +12,8 @@ services:
     volumes:
       - ./postgres:/var/lib/postgresql/data
 
-  php:
-    container_name: php
+  upskill_symfony_php:
+    container_name: upskill_symfony_php
     build:
       context: ./php
     ports:
@@ -21,15 +21,15 @@ services:
     volumes:
       - ./app/:/var/www
     depends_on:
-      - database    
+      - upskill_symfony_database    
 
-  nginx:
-    container_name: nginx
+  upskill_symfony_nginx:
+    container_name: upskill_symfony_nginx
     image: nginx:stable-alpine
     ports: [ '8080:80', '8081:443' ]
     volumes:
       - ./app:/var/www
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - php
-      - database    
+      - upskill_symfony_php
+      - upskill_symfony_database    
