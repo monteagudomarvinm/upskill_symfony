@@ -33,5 +33,5 @@ docker-clean:
 	docker volume prune -f || true ;\
 
 ssh:
-	docker-compose exec php bash
+	docker-compose exec upskill_symfony_php bash
 
